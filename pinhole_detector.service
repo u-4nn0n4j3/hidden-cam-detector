@@ -1,0 +1,22 @@
+[Unit]
+Description=Pinhole Detector Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/hidden-cam-detector
+ExecStart=/usr/bin/python3 /home/pi/hidden-cam-detector/main_system.py
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+TimeoutStopSec=10
+StandardOutput=journal
+StandardError=journal
+Environment=TELEGRAM_TOKEN=123456789:replace_with_your_bot_token
+Environment=TELEGRAM_CHAT_ID=123456789
+
+[Install]
+WantedBy=multi-user.target
